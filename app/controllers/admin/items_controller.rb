@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+  layout 'admin'
   def new
     @item = Item.new
   end

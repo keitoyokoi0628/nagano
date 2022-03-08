@@ -1,0 +1,23 @@
+
+
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, size: "200x200" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
+
+  <h1><%= @item.name %></h1>
+
+
+  <h4><%= @item.introduction %></h4>
+
+
+  <h4>¥<%= @item.add_tax_price.to_s(:dalimited) %>(税込)</h4>
+
+  <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+
+   <p><%= f.select :amount, *[1..10], include_blank: "個数選択" %></p>
+   <%= f.hidden_field :item_id, value: @item.id %>
+   <p><%= f.submit 'カートに入れる' %></p>
+
+  <% end %>
