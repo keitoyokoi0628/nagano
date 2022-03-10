@@ -1,12 +1,9 @@
 <h1>ショッピングカート</h1>
 
 <% @sum = 0%>
-
+<%= button_to "カートを空にする", destroy_all_cart_items_path(@cart_items), method: :delete %>
  <% @cart_items.each do |cart_item| %>
-
-
-
-
+  
   <%= image_tag cart_item.item.image, size: "100x100" %>
 
    <p>商品名</p>

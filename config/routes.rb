@@ -24,7 +24,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :items
     resources :customers
     resources :homes
-    resources :cart_items
+    
+    resources :cart_items do
+      collection do
+        delete 'destroy_all'
+       end
+      end
   end
 
  namespace :admin do
