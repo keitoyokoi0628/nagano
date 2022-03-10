@@ -24,7 +24,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :items
     resources :customers
     resources :homes
-    
+    resources :addresses
+
     resources :cart_items do
       collection do
         delete 'destroy_all'
