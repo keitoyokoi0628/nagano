@@ -7,7 +7,7 @@ class Public::CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.find_by(customer_id: current_customer.id, item_id: params[:cart_item][:item_id])
-    if
+    if @cart_item.present?
       @cart_item.amount += params[:cart_item][:amount].to_i
     else
       @cart_item = CartItem.new(cart_item_params)

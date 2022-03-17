@@ -25,6 +25,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :customers
     resources :homes
     resources :addresses
+    get '/orders/thanks' => 'orders#thanks', as: 'thanks'
+    resources :orders
+    post '/orders/confirm' => 'orders#confirm', as: 'confirm'
 
     resources :cart_items do
       collection do
