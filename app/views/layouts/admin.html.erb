@@ -10,19 +10,25 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-    <% if admin_signed_in? %>
-      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-      <li><%= link_to "商品一覧", admin_items_path %></li>
-      <li><%= link_to "商品新規登録", new_admin_item_path %></li>
-      <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
-      <li><%= link_to "会員一覧", admin_customers_path %></li>
-    <% else %>
-      <li>
-        <%= link_to "ログイン", new_admin_session_path %>
-      </li>
-    <% end %>
+  <body >
+    <header class="navbar navbar-expand-lg navbar-light bg-light p-3">
+      <a class="navbar-brand"><%= image_tag 'cake_ya_building', size: "200x200" %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="navbar-right">
+          <% if admin_signed_in? %>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %></button></a>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "会員一覧", admin_customers_path, class: 'nav-link text-dark' %></button></a>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "商品新規登録", new_admin_item_path, class: 'nav-link text-dark' %></button></a>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "注文履歴一覧", admin_root_path, class: 'nav-link text-dark' %></button></a>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %></button></a>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %></button></a>
+          <% else %>
+            <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "ログイン", new_admin_session_path, class: 'nav-link text-dark' %></button></a>
+          <% end %>
+        </div>
+      </div>
   </header>
     <%= yield %>
   </body>

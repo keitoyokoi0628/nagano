@@ -9,15 +9,15 @@
  <%= orders.address %><br>
  <%= orders.name %>
 
+
  <% @order_details.each do |order_detail| %>
   <p>注文商品</p>
-  <%= order_detail.item_id %>
-  <p>ステータス</p>
-  <%= order_detail.is_active %>
+  <%= order_detail.item.name %>
  <% end %>
 
  <p>支払金額</p>
  <%= orders.total_payment %>
 
+ <span><%= link_to "表示する", order_path(orders.id) %></span>
 
 <% end %>

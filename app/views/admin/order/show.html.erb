@@ -1,30 +1,27 @@
 <h1>注文履歴詳細</h1>
 
-<h4>注文情報</h4>
+<p>購入者</p>
+<%= @order.name %>
+
 <p>注文日</p>
 <%= @order.created_at %>
 
 <p>配送先</p>
 〒<%= @order.postal_code %>
-<%= @order.address %><br>
+<%= @order.address %></br>
 <%= @order.name %>
-
-<p>支払方法</p>
-<%= @order.payment_method_i18n %>
-
-
 
 <p>配送料</p>
 <%= @order.shipping_cost %>
 
-<p>ご請求額</p>
+<p>請求合計金額</p>
 <%= @order.total_payment %>
 
 
 <h4>注文内容</h4>
 
 <%= @total = 0 %>
-<% @order.order_details.each do |detail| %>
+<% @order_details.each do |detail| %>
  <p>商品</p>
  <%= detail.item.name %>
  <p>単価(税込)</p>
@@ -32,10 +29,19 @@
  <p>個数</p>
  <%= detail.amount %>
  <% @total+=detail.price * detail.amount %>
+
+
+ <p>製作ステータス</p>
+　<%= form_with model: detail, url: admin_order_detail_path(detail.id), method: :patch do |f| %>
+   <%= f.select :is_active, OrderDetail.is_actives.keys.to_a %>
+   <%= f.submit '更新' %>
+  <% end %>
+
 <% end %>
+
+
  <p>小計</p>
  <%= @total %>
 
  <p>商品合計</p>
  <%= @total %>
-

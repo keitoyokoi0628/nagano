@@ -14,10 +14,10 @@ class Public::OrdersController < ApplicationController
       @order_detail.order_id = @order.id
       @order_detail.price = cart_item.item.add_tax_price
       @order_detail.amount = cart_item.amount
-      @order_detail.is_active = "b"
+      @order_detail.is_active = 0
       @order_detail.save!
     end
-
+    @cart_items.destroy_all
     redirect_to thanks_path
   end
 
@@ -30,7 +30,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
       @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
@@ -55,6 +55,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_detail = @order.order_details
   end
 
   private

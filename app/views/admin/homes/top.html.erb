@@ -1,4 +1,11 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<h1>注文履歴一覧</h1>
 
-<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+
+<% @orders.each do |order| %>
+ <p><%= link_to order.created_at, admin_order_path(order.id) %></p>
+ <p><%= order.name %></p>
+<% end %>
+
+  <% @order_details.each do |order_detail| %>
+   <p><%= order_detail.amount %></p>
+  <% end %>

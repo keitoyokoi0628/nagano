@@ -6,24 +6,31 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-    <% if customer_signed_in? %>
-      <li><%= link_to "マイページ", customers_my_page_path %></li>
-      <li><%= link_to "商品一覧", items_path %></li>
-      <li><%= link_to "カート", cart_items_path %></li>
-      <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "商品一覧", items_path %></li>
-      <li><%= link_to "新規登録", new_customer_registration_path %></li>
-      <li><%= link_to "ログイン", new_customer_session_path %></li>
-      <li><%= link_to "管理者ログイン", new_admin_session_path %></li>
-    <% end %>
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+     <a class="navbar-brand" href="/"><%= image_tag 'cake_ya_building', size: "200x200" %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+       <div class="navbar-right">
+
+        <% if customer_signed_in? %>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "マイページ", customers_my_page_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "カート", cart_items_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %></button></a>
+        <% else %>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "About", about_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %></button></a>
+          <a><button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "管理者ログイン", new_admin_session_path, class: 'nav-link text-dark' %></button></a>
+        <% end %>
+      </div>
   　</header>
 
     <%= yield %>

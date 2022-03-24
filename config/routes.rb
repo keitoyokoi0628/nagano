@@ -26,7 +26,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :homes
     resources :addresses
     get '/orders/thanks' => 'orders#thanks', as: 'thanks'
-    resources :orders
+    resources :orders do
+      collection do
+        delete 'destroy_all'
+       end
+      end
     post '/orders/confirm' => 'orders#confirm', as: 'confirm'
 
     resources :cart_items do
@@ -41,6 +45,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :genres
     resources :items
     resources :customers
+    resources :order
+    resources :order_details
 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

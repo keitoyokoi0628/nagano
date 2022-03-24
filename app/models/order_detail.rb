@@ -1,6 +1,7 @@
 class OrderDetail < ApplicationRecord
   belongs_to :order
+  belongs_to :item
 
-  enum is_active: { a: 0, b: 1, c: 2, d: 3 }
+  enum is_active: { 製作不可: 0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }
 
 end

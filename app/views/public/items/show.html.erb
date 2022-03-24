@@ -18,6 +18,10 @@
 
    <p><%= f.select :amount, *[1..10], include_blank: "個数選択" %></p>
    <%= f.hidden_field :item_id, value: @item.id %>
-   <p><%= f.submit 'カートに入れる' %></p>
+    <% if customer_signed_in? %>
+     <p><%= f.submit 'カートに入れる' %></p>
+    <% else %>
+     <%= link_to "戻る", items_path %>
+    <% end %>
 
   <% end %>
