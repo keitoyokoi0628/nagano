@@ -1,35 +1,18 @@
 
+   <h4 class="text-left p-2"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h4>
 
-<h1><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h1>
+   <p class="text-left p-2">会員ID　　　　　<%= @customer.id %></p>
+   <p class="text-left p-2">氏名　　　　　　<%= @customer.last_name %><%= @customer.first_name %></p>
+   <p class="text-left p-2">フリガナ　　　　<%= @customer.last_name_kana %><%= @customer.first_name_kana %></p>
+   <p class="text-left p-2">郵便番号　　　　<%= @customer.postal_code %></p>
+   <p class="text-left p-2">住所　　　　　　<%= @customer.address %></p>
+   <p class="text-left p-2">電話番号　　　　<%= @customer.telephone_number %></p>
+   <p class="text-left p-2">メールアドレス　<%= @customer.email %></p>
+   <p class="text-left p-2">会員ステータス <% if @customer.is_deleted %>
+      <a>無効</a>
+     <% else %>
+      <a>有効</a>
+     <% end %></p>
 
-<h4>会員ID</h4>
-<%= @customer.id %>
 
-<h4>氏名</h4>
-<%= @customer.last_name %>
-<%= @customer.first_name %>
-
-<h4>フリガナ</h4>
-<%= @customer.last_name_kana %>
-<%= @customer.first_name_kana %>
-
-<h4>郵便番号</h4>
-<%= @customer.postal_code %>
-
-<h4>住所</h4>
-<%= @customer.address %>
-
-<h4>電話番号</h4>
-<%= @customer.telephone_number %>
-
-<h4>メールアドレス</h4>
-<%= @customer.email %>
-
-<h4>会員ステータス</h4>
-  <% if @customer.is_deleted %>
-   <p>無効</p>
-  <% else %>
-   <p>有効</p>
-  <% end %>
-
-<li><%= link_to "編集する", edit_admin_customer_path(@customer.id) %></li>
+   <p><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %>　　<%= link_to "注文履歴一覧を見る", admin_root_path, class: "btn btn-primary" %></p>

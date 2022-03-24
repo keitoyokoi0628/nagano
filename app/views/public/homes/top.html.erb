@@ -1,23 +1,26 @@
-<div class="text-center">
-  <h6>ようこそ、ながのCAKEへ！<br>
-  このサイトは、ケーキ販売のECサイトになります。<br>
-  会員でない方も商品の閲覧はできますが、<br>
-  購入には会員登録が必要になります。</h6>
+<div class="container">
+  <div class="text-center p-5">
+    <h6>ようこそ、ながのCAKEへ！<br>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員でない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必要になります。
+    </h6>
+  </div>
+   <div class="text-center p-5">
+    <h4>新着商品</h4>
+   </div>
+    <div class="row">
+        <% @items.first(4).each do |item| %>
+         <div class="col-3">
+          <% if item.image.attached? %>
+          <%= image_tag item.image, size: "200x200" %>
+          <% else %>
+          <%= image_tag 'no_image', size: "200x200" %>
+          <% end %>
+          <p></p>
+          <%= link_to item.name, item_path(item.id) %>
+          <h4>¥<%= item.price %></h4>
+         </div>
+        <% end %>
+    </div>
 </div>
-
-<h4>新着商品</h4>
-<% @items.first(4).each do |item| %>
-
-  <% if item.image.attached? %>
-    <%= image_tag item.image, size: "200x200" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "200x200" %>
-  <% end %>
-
-<h4>商品名</h4>
-<%= link_to item.name, item_path(item.id) %>
-
-<h4>¥<%= item.price %></h4>
-
-
-<% end %>

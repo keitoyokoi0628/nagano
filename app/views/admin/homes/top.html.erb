@@ -1,11 +1,24 @@
+<div class="container">
 <h1>注文履歴一覧</h1>
+ <table class="table">
+  <thead>
+   <tr>
+    <th>購入日時</th>
+    <th>購入者</th>
+    <th>注文個数</th>
+   </tr>
+  </thead>
+
+  <tbody>
+   <% @orders.each do |order| %>
+   <tr>
+       <td><%= link_to order.created_at, admin_order_path(order.id) %></td>
+       <td><%= order.name %></td>
+       <td><%= order.order_details.sum(:amount) %></td>
+   <% end %>
+   </tr>
+  </tbody>
 
 
-<% @orders.each do |order| %>
- <p><%= link_to order.created_at, admin_order_path(order.id) %></p>
- <p><%= order.name %></p>
-<% end %>
-
-  <% @order_details.each do |order_detail| %>
-   <p><%= order_detail.amount %></p>
-  <% end %>
+ </table>
+</div>
