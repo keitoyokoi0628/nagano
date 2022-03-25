@@ -1,30 +1,37 @@
-<h1>配送先登録/一覧</h1>
+<div class="container">
+ <p class="text-center p-5">配送先登録/一覧</p>
 
-<%= form_with model: @address do |f| %>
- <h4>郵便番号(ハイフンなし)</h4>
- <%= f.text_field :postal_code %>
- <h4>住所</h4>
- <%= f.text_field :address %>
- <h4>宛名</h4>
- <%= f.text_field :name %>
+ <%= form_with model: @address do |f| %>
+  <p>郵便番号(ハイフンなし)　　<%= f.text_field :postal_code %></p>
 
- <p><%= f.submit '新規登録' %></p>
+  <p>住所　　　　　　　　　　　<%= f.text_field :address %></p>
+
+  <p>宛名　　　　　　　　　　　<%= f.text_field :name %>　　　　　　<%= f.submit '新規登録', class: "btn btn-success" %></p>
+
+ <% end %>
 
 
-<% end %>
+ <table class="table">
+  <% @addresses.each do |address| %>
+   <thead>
+    <tr>
+     <th>郵便番号</th>
+     <th>住所</th>
+     <th>宛名</th>
+     <th></th>
+    </tr>
+   </thead>
 
-<% @addresses.each do |address| %>
+   <tbody>
+    <tr>
+     <td><%= address.postal_code %></td>
+     <td><%= address.address %></td>
+     <td><%= address.name %></td>
+     <td><%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success" %>
+     <%= link_to "削除する", address_path(address.id), method: :delete, class: "btn btn-danger", "data-confirm" => "配送先を削除しますか？" %></td>
+    </tr>
+   </tbody>
+  <% end %>
+ </table>
 
- <h4>郵便番号</h4>
- <%= address.postal_code %>
-
- <h4>住所</h4>
- <%= address.address %>
-
- <h4>宛名</h4>
- <%= address.name %>
-
- <h4><%= link_to "編集する", edit_address_path(address.id) %></h4>
- <h4><%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "配送先を削除しますか？" %></h4>
-
-<% end %>
+</div>

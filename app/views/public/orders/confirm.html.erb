@@ -1,42 +1,59 @@
-<h1>注文情報確認</h1>
+<div class="container">
+<h4 class="text-left p-5">注文情報確認</h4>
 
-<!--カート内商品-->
-<% @sum = 0%>
-<% @cart_items.each do |cart_item| %>
- <%= image_tag cart_item.item.image, size: "100x100" %>
- <p>商品名</p>
- <%= cart_item.item.name %>
- <p>単価(税込)</p>
- <%= cart_item.item.add_tax_price.to_s(:dalimited) %>
- <p>数量</p>
- <%= cart_item.amount %>
- <P>小計</P>
- <%= cart_item.subtotal %>
- <p><% @sum+=cart_item.subtotal %></p>
-<% end %>
-<p>送料</p>
-<p>800</p>
-<p>商品合計<%= @sum %></p>
-<P>請求合計<%= @sum + 800 %></P>
+  <div class="row">
+  <% @sum = 0%>
+  <% @cart_items.each do |cart_item| %>
+
+   <div class="col-10">
+    <table class="table table-striped table-hover">
+      <thead>
+       <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td><%= image_tag cart_item.item.image, size: "100x100" %><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.add_tax_price.to_s(:dalimited) %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.subtotal %><% @sum+=cart_item.subtotal %></td>
+       </tr>
+      </tbody>
+      </table>
+      <% end %>
+
+   </div>
+   <div class="col-2">
+     <p>送料800</p>
+     <p>商品合計<%= @sum %></p>
+     <P>請求合計<%= @sum + 800 %></P>
+  </div>
+ </div>
 
 
 
-<!--住所と支払方法-->
+  <!--住所と支払方法-->
 
-<p>支払方法</p>
-<%= @order.payment_method_i18n %>
-<p>お届け先</p>
-<%= @order.postal_code %>
-<%= @order.address %>
-<%= @order.name %>
-<!--送信ボタンとcreateアクションにデータを送る-->
-<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
- <%= f.hidden_field :customer_id %>
- <%= f.hidden_field :postal_code %>
- <%= f.hidden_field :address %>
- <%= f.hidden_field :name %>
- <%= f.hidden_field :payment_method %>
- <%= f.hidden_field :shipping_cost %>
- <%= f.hidden_field :total_payment, value: @sum + 800 %>
- <%= f.submit "注文を確定する" %>
-<% end %>
+  <p>支払方法　　　<%= @order.payment_method_i18n %></p>
+
+  <p>お届け先〒　　<%= @order.postal_code %><%= @order.address %><br><%= @order.name %></p>
+
+
+
+  <!--送信ボタンとcreateアクションにデータを送る-->
+  <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+   <%= f.hidden_field :customer_id %>
+   <%= f.hidden_field :postal_code %>
+   <%= f.hidden_field :address %>
+   <%= f.hidden_field :name %>
+   <%= f.hidden_field :payment_method %>
+   <%= f.hidden_field :shipping_cost %>
+   <%= f.hidden_field :total_payment, value: @sum + 800 %>
+   <%= f.submit "注文を確定する", class: "btn btn-success" %>
+  <% end %>
+
+</div>

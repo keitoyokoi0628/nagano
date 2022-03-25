@@ -1,41 +1,42 @@
-<h1>注文履歴詳細</h1>
+<div class="container">
 
-<h4>注文情報</h4>
-<p>注文日</p>
-<%= @order.created_at %>
+ <h4 class="text-left p-5">注文履歴詳細</h4>
+ <div class="row">
+  <div class="col-9">
+   <h6>注文情報</h6>
+   <p>注文日　　　<%= @order.created_at %></p>
+   <p>配送先　　　〒<%= @order.postal_code %><%= @order.address %><br><%= @order.name %></p>
+   <p>支払方法　　　<%= @order.payment_method_i18n %></p>
+  </div>
 
-<p>配送先</p>
-〒<%= @order.postal_code %>
-<%= @order.address %><br>
-<%= @order.name %>
+  <div class="col-3">
+   <h6>請求情報</h6>
+   <p>配送料<%= @order.shipping_cost %></p>
+   <p>ご請求額<%= @order.total_payment %></p>
+  </div>
 
-<p>支払方法</p>
-<%= @order.payment_method_i18n %>
+ </div>
 
-
-
-<p>配送料</p>
-<%= @order.shipping_cost %>
-
-<p>ご請求額</p>
-<%= @order.total_payment %>
-
-
-<h4>注文内容</h4>
-
-<%= @total = 0 %>
-<% @order.order_details.each do |detail| %>
- <p>商品</p>
- <%= detail.item.name %>
- <p>単価(税込)</p>
- <%= detail.price %>
- <p>個数</p>
- <%= detail.amount %>
- <% @total+=detail.price * detail.amount %>
-<% end %>
- <p>小計</p>
- <%= @total %>
-
- <p>商品合計</p>
- <%= @total %>
-
+ <h6>注文内容</h6>
+ <table class="table">
+  <% @total = 0 %>
+  <% @order.order_details.each do |detail| %>
+   <thead>
+    <tr>
+     <th>商品</th>
+     <th>単価(税込)</th>
+     <th>個数</th>
+     <th>小計</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td><%= detail.item.name %></td>
+     <td><%= detail.price %></td>
+     <td><%= detail.amount %></td>
+     <td><%= @total+=detail.price * detail.amount %></td>
+    </tr>
+   </tbody>
+  <% end %>
+ </table>
+</div>

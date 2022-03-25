@@ -1,31 +1,33 @@
-<h1>会員情報編集</h1>
+<div class="container">
+<h4 class="text p-5">会員情報編集</h4>
 
 <%= form_with model: @customer, url: customer_path(current_customer), method: :patch do |f| %>
 
- <h4>氏名</h4>
- <%= f.text_field :last_name %>
- <%= f.text_field :first_name %>
+ <p>氏名　　　　　　　<%= f.text_field :last_name %>　<%= f.text_field :first_name %></p>
 
- <h4>フリガナ</h4>
- <%= f.text_field :last_name_kana %>
- <%= f.text_field :first_name_kana %>
 
- <h4>郵便番号</h4>
- <%= f.text_field :postal_code %>
 
- <h4>住所</h4>
- <%= f.text_field :address %>
+ <p>フリガナ　　　　　<%= f.text_field :last_name_kana %>　<%= f.text_field :first_name_kana %></p>
 
- <h4>電話番号</h4>
- <%= f.text_field :telephone_number %>
 
- <h4>メールアドレス</h4>
- <%= f.text_field :email %>
 
- <p><%= f.submit '編集内容を保存' %></p>
+ <p>郵便番号　　　　　<%= f.text_field :postal_code %></p>
 
- <p><%= link_to '退会する', unsubscribe_path %></p>
+
+ <p>住所　　　　　　　<%= f.text_field :address %></p>
+
+
+ <p>電話番号　　　　　<%= f.text_field :telephone_number %></p>
+
+
+ <p>メールアドレス　　<%= f.text_field :email %></p>
+
+
+ <p><%= f.submit '編集内容を保存', class: "btn btn-success" %>　　　　　　　　<%= link_to '退会する', unsubscribe_path, class: "btn btn-danger" %></p>
+
+ <p></p>
 
 
 
 <% end %>
+</div>
